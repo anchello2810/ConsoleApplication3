@@ -3,13 +3,12 @@
 
 #include <iostream>
 #include <ctime>
-#include <time.h>
 
 
 
 int main()
 {
-    const int N = 3;
+    const int N = 5;
     int array[N][N];
 
     for (int i = 0; i < N; i++)
@@ -23,14 +22,22 @@ int main()
         std::cout << "\n";
     }
 
-    time_t t;
-    time(&t);
-    int x = (localtime(&t)->tm_mday) % N;
 
+    struct tm newtime;
     time_t now = time(0);
-    tm* localtm = localtime(&now);
-    std::cout << "The local date and time is: " << asctime(localtm);
+    localtime_s(&newtime, &now);
+    int x = localtime_s(&newtime, &now) % N;
+    int** a = new int* [N];
+    int Sum = 0;
+    for (int i = 0; i < N; i++)
+    {
+        a[i] = new int[N];
 
- 
-    
-}
+        for (int j = 0; j < N; j++)
+        {
+            if (i == x) Sum += a[i][j];
+        }
+    }
+    std::cout << Sum;
+
+    }
