@@ -22,22 +22,21 @@ int main()
         std::cout << "\n";
     }
 
-
     struct tm newtime;
     time_t now = time(0);
     localtime_s(&newtime, &now);
-    int x = localtime_s(&newtime, &now) % N;
+    int last_idx = localtime_s(&newtime, &now) % N;
     int** a = new int* [N];
-    int Sum = 0;
+    int sum = 0;
     for (int i = 0; i < N; i++)
     {
         a[i] = new int[N];
 
         for (int j = 0; j < N; j++)
         {
-            if (i == x) Sum += a[i][j];
+            sum += a[last_idx][j];
         }
     }
-    std::cout << Sum;
+    std::cout << sum;
 
     }
